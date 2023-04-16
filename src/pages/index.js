@@ -15,8 +15,9 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
 
-        <ClockFace />
-
+        <div>
+          <ClockFace />
+        </div>
       </main>
     </>
   )
