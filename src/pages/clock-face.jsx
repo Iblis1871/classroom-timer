@@ -35,16 +35,26 @@ export default function ClockFace() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    calculateEndTime({ minutes }, { hours });
+    calculateEndTime(minutes, hours);
   }
 
-  function calculateEndTime({ minutes }, { hours }) {
-    daySeconds = hours * 3600 + minutes * 60;
-    hourSeconds = Math.floor(hours * 3600 + minutes * 60);
-    minuteSeconds = Math.floor(hours * 60 + minutes);
-    endTime = hours * 3600 + minutes * 60;
-    console.log(endTime);
+  function calculateEndTime(minutesToAdd, hoursToAdd) {
+    const today = new Date();
+    const currentTotalMinutes = today.getHours() * 60 + today.getMinutes();
+    const newTotalMinutes = currentTotalMinutes + hoursToAdd * 60 + minutesToAdd;
+    const newHours = Math.floor(newTotalMinutes / 60) % 24; // Consider the rollover of hours
+    const newMinutes = newTotalMinutes % 60;
+    const newSeconds = today.getSeconds();
+  
+    const finishingTime = `${String(newHours).padStart(2, '0')}:${String(newMinutes).padStart(2, '0')}:${String(newSeconds).padStart(2, '0')}`;
+  
+    console.log(today.getMinutes());
+    console.log(today.getHours());
+    console.log(finishingTime);
+  
+    return finishingTime;
   }
+
 
   return (
     <>
